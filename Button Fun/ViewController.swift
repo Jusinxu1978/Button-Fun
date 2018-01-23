@@ -10,16 +10,20 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBAction func buttonPressed(_ sender: UIButton) {
+        let title = sender.title(for:.normal)
+        let plainText = "\(title ?? "no button pressed") button pressed"
+        //statusLabel.text = plainText
+        let styledText = NSMutableAttributedString(string: plainText)
+        let attributes = [
+            NSAttributedStringKey.font:
+                UIFont.boldSystemFont(ofSize: statusLabel.font.pointSize)
+        ]
+        let nameRange = (plainText as NSString).range(of: title!)
+        styledText.setAttributes(attributes, range: nameRange)
+        statusLabel.attributedText = styledText
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
+    
 }
 
